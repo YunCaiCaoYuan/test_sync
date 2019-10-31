@@ -193,8 +193,7 @@ handle_cast(compare_beams, State) ->
     end,
     NewBeamLastMod = lists:usort(lists:filtermap(F, State#state.modules)),
 
-    %% Compare to previous results, if there are changes, then reload
-    %% the beam...
+    %% Compare to previous results, if there are changes, then reload the beam...
     process_beam_lastmod(State#state.beam_lastmod, NewBeamLastMod, State#state.patching),
 
     %% Schedule the next interval...
