@@ -57,7 +57,7 @@ rescan() ->
     gen_server:cast(?SERVER, discover_modules),
     gen_server:cast(?SERVER, discover_src_dirs),
     gen_server:cast(?SERVER, discover_src_files),
-    gen_server:cast(?SERVER, compare_src_files),
+%%    gen_server:cast(?SERVER, compare_src_files),
     gen_server:cast(?SERVER, compare_beams),
     gen_server:cast(?SERVER, compare_hrl_files),
     ok.
