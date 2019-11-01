@@ -191,6 +191,8 @@ handle_cast(compare_beams, State) ->
                 false %% non_existing | cover_compiled | preloaded
         end
     end,
+
+    sync_notify:log_errors(io_lib:format("State#state.modules = ~w~n", [State#state.modules])), %% fixme 调试
     NewBeamLastMod = lists:usort(lists:filtermap(F, State#state.modules)),
 
     %% Compare to previous results, if there are changes, then reload the beam...
