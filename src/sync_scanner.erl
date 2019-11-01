@@ -192,7 +192,7 @@ handle_cast(compare_beams, State) ->
         end
     end,
 
-    sync_notify:log_errors(io_lib:format("State#state.modules = ~w~n", [State#state.modules])), %% fixme 调试
+%%    sync_notify:log_errors(io_lib:format("State#state.modules = ~w~n", [State#state.modules])), %% fixme
     NewBeamLastMod = lists:usort(lists:filtermap(F, State#state.modules)),
 
     %% Compare to previous results, if there are changes, then reload the beam...
@@ -725,6 +725,8 @@ exclude_modules_to_scan(Modules) ->
     case application:get_env(sync, excluded_modules) of
         {ok, ExcludedModules} when is_list(ExcludedModules) andalso
                                    ExcludedModules =/= []->
+            sync_notify:log_errors(io_lib:format("ExcludedModules = ~w~n", [ExcludedModules])), %% fixme
+
             lists:foldl(fun(Module, Acc) ->
                                 case module_matches(Module, ExcludedModules) of
                                     true ->
